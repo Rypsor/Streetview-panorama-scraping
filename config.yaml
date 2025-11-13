@@ -1,11 +1,14 @@
 ## IMAGE DOWNLOAD SETTINGS
 
-# Center of area to search for panoramas
-center: [50.7734, 14.2080]
-# Radius in kilometres
-radius: 3
-# How many dummy points are searched, lower makes it faster, but some panoramas will be missed
-resolution: 500
+# Bounding box (caja delimitadora) para buscar panoramas.
+# Puedes obtener estas coordenadas haciendo clic derecho en Google Maps.
+# Sub-área 3 (Fila 1, Col 3)
+top_left: [6.369212, -75.586281]
+bottom_right: [6.254542000000001, -75.550747]
+
+# Cuántos puntos de prueba se buscan en la cuadrícula.
+# Un número más bajo es más rápido, pero puede omitir algunos panoramas.
+resolution: 100
 
 ## IMAGE PROJECTION SETTINGS
 

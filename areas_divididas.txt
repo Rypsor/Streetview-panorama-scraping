@@ -1,0 +1,38 @@
+### Rectángulo Principal (para config.yaml)
+top_left: [6.369212, -75.657349]
+bottom_right: [6.139872, -75.515213]
+
+==============================
+
+# Sub-área 1 (Fila 1, Col 1)
+top_left: [6.369212, -75.657349]
+bottom_right: [6.254542000000001, -75.621815]
+
+# Sub-área 2 (Fila 1, Col 2)
+top_left: [6.369212, -75.621815]
+bottom_right: [6.254542000000001, -75.586281]
+
+# Sub-área 3 (Fila 1, Col 3)
+top_left: [6.369212, -75.586281]
+bottom_right: [6.254542000000001, -75.550747]
+
+# Sub-área 4 (Fila 1, Col 4)
+top_left: [6.369212, -75.550747]
+bottom_right: [6.254542000000001, -75.515213]
+
+# Sub-área 5 (Fila 2, Col 1)
+top_left: [6.254542000000001, -75.657349]
+bottom_right: [6.139872, -75.621815]
+
+# Sub-área 6 (Fila 2, Col 2)
+top_left: [6.254542000000001, -75.621815]
+bottom_right: [6.139872, -75.586281]
+
+# Sub-área 7 (Fila 2, Col 3)
+top_left: [6.254542000000001, -75.586281]
+bottom_right: [6.139872, -75.550747]
+
+# Sub-área 8 (Fila 2, Col 4)
+top_left: [6.254542000000001, -75.550747]
+bottom_right: [6.139872, -75.515213]
+

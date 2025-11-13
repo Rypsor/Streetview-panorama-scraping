@@ -66,15 +66,28 @@ if __name__ == "__main__":
     ## Read configuration from yaml file
     with open('config.yaml') as f:
         config = yaml.safe_load(f)
-        center = config['center']
-        radius = config['radius']
+        # --- MODIFICADO ---
+        # Ya no leemos 'center' ni 'radius'
+        # center = config['center']
+        # radius = config['radius']
+        top_left = config['top_left']         # <-- MODIFICADO
+        bottom_right = config['bottom_right'] # <-- MODIFICADO
         resolution = config['resolution']
+        # ------------------
 
-    top_left = (center[0]-radius/70, center[1]+radius/70)
-    bottom_right = (center[0]+radius/70, center[1]-radius/70)
+    # Ya no calculamos top_left y bottom_right, los leemos directamente
+    # top_left = (center[0]-radius/70, center[1]+radius/70)
+    # bottom_right = (center[0]+radius/70, center[1]-radius/70)
 
-    lat_diff = top_left[0] - bottom_right[0]
-    lon_diff = top_left[1] - bottom_right[1]
+    # Calcular diferencias para la cuadrícula
+    lat_diff = top_left[0] - bottom_right[0] # <-- MODIFICADO (lógica invertida por orden lat)
+    lon_diff = bottom_right[1] - top_left[1] # <-- MODIFICADO (lógica invertida por orden lon)
+    
+    # Calcular un centro solo para centrar el mapa
+    center = [
+        (top_left[0] + bottom_right[0]) / 2,
+        (top_left[1] + bottom_right[1]) / 2
+    ] # <-- MODIFICADO
 
     # Create map
     M = folium.Map(location=center, tiles='OpenStreetMap', zoom_start=zoom_start)
@@ -83,12 +96,24 @@ if __name__ == "__main__":
     M.add_child(folium.LatLngPopup())
 
     # Mark Area
-    folium.Circle(location=center, radius=radius*1000, color='#FF000099', fill='True').add_to(M)
+    # folium.Circle(location=center, radius=radius*1000, color='#FF000099', fill='True').add_to(M)
+    # --- MODIFICADO: Dibujar un rectángulo en lugar de un círculo ---
+    folium.Rectangle(
+        bounds=[top_left, bottom_right],
+        color='#FF000099',
+        fill=True
+    ).add_to(M)
+    # -----------------------------------------------------------
 
     # Get testing points
     test_points = list(itertools.product(range(resolution+1), range(resolution+1)))
-    test_points = [(bottom_right[0] + x*lat_diff/resolution, bottom_right[1] + y*lon_diff/resolution) for (x,y) in test_points]
-    test_points = [p for p in test_points if distance(p, center) <= radius]
+    # --- MODIFICADO: Generar puntos dentro del rectángulo definido ---
+    test_points = [(top_left[0] - x*lat_diff/resolution, top_left[1] + y*lon_diff/resolution) for (x,y) in test_points]
+    
+    # --- MODIFICADO: Eliminar el filtro de distancia circular ---
+    # Esta es la línea clave que forzaba el círculo. La eliminamos.
+    # test_points = [p for p in test_points if distance(p, center) <= radius]
+    # -------------------------------------------------------
     
     ### Show test points
     # for point in test_points:
