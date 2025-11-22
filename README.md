@@ -1,6 +1,6 @@
 # Streetview-panorama-scraping
 
-This module helps you scrape panoramas from Google's streetview for given area.
+This module helps you scrape panoramas from Google's streetview for Medellin city, Colombia
 
 Scraping is done asynchronously using aiohttp and asyncio packages.
 
